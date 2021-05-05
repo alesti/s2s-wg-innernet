@@ -1,25 +1,27 @@
 # Site2site with wireguard / innernet
 
 This is a [wireguard](https://www.wireguard.com/#cryptokey-routing) test rig
-configs for [innernet](https://github.com/tonarino/innernet) improvements, i
+for [innernet](https://github.com/tonarino/innernet) improvements, i
 built it to prove my understanding of wireguard site2site configurations.
 
 ## Target
 
 Help to improve the capabilities of
-[innernet](https://github.com/tonarino/innernet) with a site2site vpn config.
+[innernet](https://github.com/tonarino/innernet) with site2site vpn capabilities.
+Innernet is not able to route so far.
 
 FIXME: Link to the related discussion in
 https://github.com/tonarino/innernet/discussions 
 
-The discussion will be there, not here. This is only to be able to get an
-sharper look on details. 
+The discussion will be there, not here. This is only to get an
+closer look on details, if needed. 
 
 ## Lab
 
-The lab rig is setup in my regular home network, all components have a leg in
-it (192.168.86.0/24) - think it as the evil internet your services need to run
-through but needed to be protected: ![innernet-testrig-local](testnetwork.png)
+The lab rig lives in my regular home network, all components have a leg in
+it (192.168.86.0/24) - think it as the evil internet:
+
+ ![innernet-testrig-local](testnetwork.png)
 
 
 | function / name     | localnet ip | vpn ip (cidr)| lan ip |
@@ -40,14 +42,16 @@ through but needed to be protected: ![innernet-testrig-local](testnetwork.png)
 * no configuration changes on any lan peers neccessary
 * changes are possible without mental breakdown
 
+.
+
 * get an idea what is needed to build the same with innernet
 
 ## Configuration
 
 Wireguard uses port 51830 on all vpn peers and interface wg1 on all linux peers.
-IPV6 is switched off on all linux peers (more control in the lab).
+IPv6 is switched off on all linux peers (more control in the lab).
 
-```
+```bash
 root@nine-one:~# grep -v ^# /etc/sysctl.conf|sort|uniq
 
 net.ipv4.ip_forward=1
@@ -73,7 +77,7 @@ It also adds routes to the hidden lan1/2 networks.
 
 `PostUp` adds routes to the counterpart lan (do not use the default route) and
 masquerades traffic to the ip address assigned to the interfaces, so there is
-no change neccessary to nodes in lan1/2. 
+no change neccessary to nodes in `lan1/2`. 
 
 It would be possible to use the vpn server as gateway address but thats not the
 case in the later innernet scenario.
@@ -86,12 +90,12 @@ Since the [macos wireguard
 gui](https://apps.apple.com/us/app/wireguard/id1451685025?ls=1&mt=12) cannot
 handle `PostUp`, i use also wg-quick on the mac.
 
-`PostUp` adds routes to the hidden lan1/2 networks.
+`PostUp` adds routes to the hidden `lan1/2` networks.
 
 ## This is real hardware
 
 Since Docker and other virtualizations will add things to my network stack
 and i wanted to test the network stack, i built this in real hardware.
 
-All but the human peer (macbookpro) are part of my herd of singleboard
+All but the human peer (mbp) are part of my herd of singleboard
 computers (raspi 2, 3, 4, odroid h2, atom).
