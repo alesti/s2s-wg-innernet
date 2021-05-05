@@ -10,8 +10,7 @@ Help to improve the capabilities of
 [innernet](https://github.com/tonarino/innernet) with site2site vpn capabilities.
 Innernet is not able to route so far.
 
-FIXME: Link to the related discussion in
-https://github.com/tonarino/innernet/discussions 
+[Link to the related discussion in innernets repo](https://github.com/tonarino/innernet/discussions/66)
 
 The discussion will be there, not here. This is only to get an
 closer look on details, if needed. 
